@@ -35,6 +35,7 @@ class CardDetails extends React.Component {
             quizData: props.navigation.state.params.cardData.items,
             itemCount: props.navigation.state.params.cardData.items.length,
             currentItem: null,
+            correctAnswerText: null,
             keyboardHeight: 0,
             backdropPressToClose: false
         }
@@ -128,7 +129,8 @@ class CardDetails extends React.Component {
                 isFreeAnswerQuizRunning: false,
                 quizData: this.cardData().items,
                 itemCount: this.cardData().items.length,
-                currentItem: null
+                currentItem: null,
+                correctAnswerText: null
             });
             this.CardToolbar.changeToolbarState('normal');
             return {};
@@ -165,6 +167,7 @@ class CardDetails extends React.Component {
             isSelectionQuizRunning: true,
             isFreeAnswerQuizRunning: false,
             currentItem: item,
+            correctAnswerText: null,
             itemCount: --this.state.itemCount
         }, () => {
             this.setState({
@@ -213,6 +216,7 @@ class CardDetails extends React.Component {
             isSelectionQuizRunning: false,
             isFreeAnswerQuizRunning: true,
             currentItem: item,
+            correctAnswerText: null,
             itemCount: --this.state.itemCount
         }, () => {
             this.setState({
@@ -229,10 +233,13 @@ class CardDetails extends React.Component {
         var title = this.state.currentItem.title;
         var altTitles = this.state.currentItem.altTitles;
 
-        if (text == title) {
+        if (text.toLowerCase() == title.toLowerCase()) {
             this.state.currentItem.missedQuestion = false;
             this.CardToolbar.changeToolbarState('correct');
         } else {
+            this.setState({
+                correctAnswerText: title
+            });
             this.state.currentItem.missedQuestion = true;
             this.CardToolbar.changeToolbarState('incorrect');
         }
@@ -254,6 +261,8 @@ class CardDetails extends React.Component {
                             handleSelectionQuizItemSelection={(item, key) => this.onSelectionQuizItemSelection(item, key)} />
 
                 <Animated.View style={{paddingBottom: this.state.keyboardHeight}}>
+
+                    { this.state.correctAnswerText ? <Text>{this.state.correctAnswerText}</Text> : null }
 
                     <CardToolbar ref={o => this.CardToolbar = o}
                                 isSelectionQuizRunning={this.state.isSelectionQuizRunning}
