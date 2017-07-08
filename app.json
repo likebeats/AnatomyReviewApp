@@ -17,7 +17,11 @@
       "assetExts": ["ttf", "mp4"]
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.d511.AnatomyReview"
+    },
+    "android": {
+      "package": "com.d511.AnatomyReview"
     }
   }
 }

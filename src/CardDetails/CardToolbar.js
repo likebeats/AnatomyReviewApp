@@ -8,6 +8,9 @@ import {
 } from 'react-native';
 import Toolbar from '../Views/Toolbar';
 
+const SELECTION_QUIZ = 1;
+const FREE_ANSWER_QUIZ = 2;
+
 class CardToolbar extends React.Component {
 
     constructor(props) {
@@ -22,8 +25,8 @@ class CardToolbar extends React.Component {
 
     onHidePinsPressed() {}
     
-    onStartQuizPressed() {
-        this.props.handleStartQuzBtnPressed();
+    onStartQuizPressed(type) {
+        this.props.handleStartQuzBtnPressed(type);
     }
     
     onNextPagePressed() {}
@@ -87,7 +90,7 @@ class CardToolbar extends React.Component {
                         </View>
                         <TouchableOpacity onPress={this.onNextQuestionPressed.bind(this)}>
                             <View style={styles.toolbarItem}>
-                                <Text style={{color: this.state.quizToolbarTextColor, fontWeight: 'bold'}}>></Text>
+                                <Text style={{color: this.state.quizToolbarTextColor, fontWeight: 'bold'}}>Next</Text>
                             </View>
                         </TouchableOpacity>
                     </Toolbar>
@@ -109,7 +112,7 @@ class CardToolbar extends React.Component {
                         </TouchableOpacity>
                         <TouchableOpacity onPress={this.onNextQuestionPressed.bind(this)}>
                             <View style={styles.toolbarItem}>
-                                <Text style={{color: this.state.quizToolbarTextColor, fontWeight: 'bold'}}>></Text>
+                                <Text style={{color: this.state.quizToolbarTextColor, fontWeight: 'bold'}}>Next</Text>
                             </View>
                         </TouchableOpacity>
                     </Toolbar>
@@ -118,16 +121,12 @@ class CardToolbar extends React.Component {
 
                     // DEFAULT STATE
                     <Toolbar>
-                        <TouchableOpacity onPress={this.onHidePinsPressed.bind(this)}>
-                            <View style={styles.toolbarItem}><Text>Previous</Text></View>
+                        <TouchableOpacity onPress={() => this.onStartQuizPressed(SELECTION_QUIZ)}>
+                            <View style={styles.toolbarItem}><Text style={{fontWeight: 'bold'}}>Matching Quiz</Text></View>
                         </TouchableOpacity>
                         
-                        <TouchableOpacity onPress={this.onStartQuizPressed.bind(this)}>
-                            <View style={styles.toolbarItem}><Text style={{fontWeight: 'bold'}}>Start Quiz</Text></View>
-                        </TouchableOpacity>
-                        
-                        <TouchableOpacity onPress={this.onNextPagePressed.bind(this)}>
-                            <View style={styles.toolbarItem}><Text>Next &nbsp;</Text></View>
+                        <TouchableOpacity onPress={() => this.onStartQuizPressed(FREE_ANSWER_QUIZ)}>
+                            <View style={styles.toolbarItem}><Text style={{fontWeight: 'bold'}}>Open-ended Quiz</Text></View>
                         </TouchableOpacity>
                     </Toolbar>
                 }

@@ -3,20 +3,19 @@ import {
   ListView
 } from 'react-native';
 import CategoryCell from './CategoryCell';
-import { cardData } from '../constants';
 
 class Categories extends React.Component {
 
-  static navigationOptions = {
-    title: 'All Subjects',
-  };
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.cardData.title
+  });
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
     this.state = {
-      dataSource: ds.cloneWithRows(cardData),
+      dataSource: ds.cloneWithRows(props.navigation.state.params.cardData),
     };
   }
 

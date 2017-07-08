@@ -1,8 +1,17 @@
 import React from 'react';
-import { View, Text, KeyboardAvoidingView } from 'react-native';
+import { 
+    View, 
+    Text, 
+    KeyboardAvoidingView,
+    Animated,
+    Keyboard,
+    TouchableOpacity,
+    StyleSheet
+} from 'react-native';
 import CardToolbar from './CardToolbar';
 import CardCanvas from './CardCanvas';
 import ActionSheet from 'react-native-actionsheet'
+import Modal from 'react-native-modalbox';
 
 const CANCEL_INDEX = 0
 const options = [ 'Cancel', 'Selection', 'Free Answer' ]
@@ -25,28 +34,59 @@ class CardDetails extends React.Component {
             isFreeAnswerQuizRunning: false,
             quizData: props.navigation.state.params.cardData.items,
             itemCount: props.navigation.state.params.cardData.items.length,
-            currentItem: null
+            currentItem: null,
+            keyboardHeight: 0,
+            backdropPressToClose: false
         }
+    }
+    
+    componentWillMount () {
+        this.keyboardDidShowSub = Keyboard.addListener('keyboardDidShow', this.keyboardDidShow);
+        this.keyboardDidHideSub = Keyboard.addListener('keyboardDidHide', this.keyboardDidHide);
+    }
+
+    componentWillUnmount() {
+        this.keyboardDidShowSub.remove();
+        this.keyboardDidHideSub.remove();
+    }
+
+    keyboardDidShow = (event) => {
+        console.log('keyboardDidShow');
+        this.setState({
+            keyboardHeight: event.endCoordinates.height
+        });
+    };
+
+    keyboardDidHide = (event) => {
+        this.setState({
+            keyboardHeight: 0
+        });
+    };
+
+    onModalOpened() {
+        this.setState({
+            backdropPressToClose: true
+        });
+    }
+    
+    onModalClosed() {
+        this.setState({
+            backdropPressToClose: false
+        });
     }
 
     cardData() {
         return this.props.navigation.state.params.cardData;
     }
-    
-    componentDidMount() {}
 
-    startQuiz() {
-        this.ActionSheet.show();
-    }
-
-    handleActionSheetPress(i) {
-        if (i == 1) {
+    startQuiz(type) {
+        if (type == SELECTION_QUIZ) {
             this.setState({
                 selectedQuizType: SELECTION_QUIZ
             }, () => {
                 this.nextQuestion();
             });
-        } else if (i == 2) {
+        } else if (type == FREE_ANSWER_QUIZ) {
             this.setState({
                 selectedQuizType: FREE_ANSWER_QUIZ
             }, () => {
@@ -116,10 +156,10 @@ class CardDetails extends React.Component {
         let { item, quizData } = this.processNextQuizQuestion();
         if (item == null) { return; } // quiz ended
 
-        console.log('quiz data:');
-        console.log(quizData);
-        console.log('current question:');
-        console.log(item);
+        // console.log('quiz data:');
+        // console.log(quizData);
+        // console.log('current question:');
+        // console.log(item);
 
         this.setState({
             isSelectionQuizRunning: true,
@@ -135,6 +175,15 @@ class CardDetails extends React.Component {
 
     onSelectionQuizItemSelection(item, key) {
         
+        if (this.state.isFreeAnswerQuizRunning == true) {
+            return;
+        }
+
+        if (this.state.isSelectionQuizRunning == false) {
+            this.refs[key].open();
+            return;
+        }
+
         if (this.state.currentItem.title == item.title) {
             this.state.currentItem.missedQuestion = false;
             this.CardToolbar.changeToolbarState('correct');
@@ -153,12 +202,12 @@ class CardDetails extends React.Component {
         let { item, quizData } = this.processNextQuizQuestion();
         if (item == null) { return; } // quiz ended
 
-        console.log('quiz data:');
-        console.log(quizData);
-        console.log('current question:');
-        console.log(item);
-
         item.pinFocused = true;
+
+        // console.log('quiz data:');
+        // console.log(quizData);
+        // console.log('current question:');
+        // console.log(item);
 
         this.setState({
             isSelectionQuizRunning: false,
@@ -174,10 +223,13 @@ class CardDetails extends React.Component {
 
     onFreeAnswerInputConfirmed(text) {
 
-        console.log(this.state.currentItem.title);
-        console.log(text);
+        // console.log(this.state.currentItem.title);
+        // console.log(text);
 
-        if (text == this.state.currentItem.title) {
+        var title = this.state.currentItem.title;
+        var altTitles = this.state.currentItem.altTitles;
+
+        if (text == title) {
             this.state.currentItem.missedQuestion = false;
             this.CardToolbar.changeToolbarState('correct');
         } else {
@@ -185,37 +237,74 @@ class CardDetails extends React.Component {
             this.CardToolbar.changeToolbarState('incorrect');
         }
     }
+
+    handleCanvasTouched() {
+        console.log('handleCanvasTouched');
+        Keyboard.dismiss();
+    }
     
     render() {
         return (
-            <KeyboardAvoidingView 
-                style={{backgroundColor: 'white', flex: 1}} 
-                resetScrollToCoords={{ x: 0, y: 0 }}
-                scrollEnabled={true}>
+            <View style={{flex: 1}}>
                 
-                <ActionSheet
-                    ref={o => this.ActionSheet = o}
-                    title={title}
-                    options={options}
-                    cancelButtonIndex={CANCEL_INDEX}
-                    onPress={this.handleActionSheetPress.bind(this)}
-                    />
-
                 <CardCanvas isSelectionQuizRunning={this.state.isSelectionQuizRunning}
                             isFreeAnswerQuizRunning={this.state.isFreeAnswerQuizRunning}
                             cardData={this.cardData()}
+                            keyboardHeight={this.state.keyboardHeight}
                             handleSelectionQuizItemSelection={(item, key) => this.onSelectionQuizItemSelection(item, key)} />
 
-                <CardToolbar ref={o => this.CardToolbar = o}
-                            isSelectionQuizRunning={this.state.isSelectionQuizRunning}
-                            isFreeAnswerQuizRunning={this.state.isFreeAnswerQuizRunning}
-                            currentItem={this.state.currentItem}
-                            handleStartQuzBtnPressed={this.startQuiz.bind(this)}
-                            handleNextQuestionPressed={this.nextQuestion.bind(this)}
-                            handleFreeAnswerQuizSubmit={(text) => this.onFreeAnswerInputConfirmed(text)} />
-            </KeyboardAvoidingView>
+                <Animated.View style={{paddingBottom: this.state.keyboardHeight}}>
+
+                    <CardToolbar ref={o => this.CardToolbar = o}
+                                isSelectionQuizRunning={this.state.isSelectionQuizRunning}
+                                isFreeAnswerQuizRunning={this.state.isFreeAnswerQuizRunning}
+                                currentItem={this.state.currentItem}
+                                handleStartQuzBtnPressed={(type) => this.startQuiz(type)}
+                                handleNextQuestionPressed={this.nextQuestion.bind(this)}
+                                handleFreeAnswerQuizSubmit={(text) => this.onFreeAnswerInputConfirmed(text)} />
+                </Animated.View>
+
+                {this.cardData().items.map((item, i) => {
+                    const modalHeight = (item.height > 200) ? item.height : 130;
+                    return (
+                        <Modal style={[styles.modal, {height: modalHeight} ]}
+                                position={"center"}
+                                key={`modal${i}`}
+                                ref={`modal${i}`}
+                                backdropPressToClose={this.state.backdropPressToClose}
+                                onOpened={this.onModalOpened.bind(this)}
+                                onClosed={this.onModalClosed.bind(this)} >
+                            <Text style={styles.modalText}>{item.title}</Text>
+                            <Text style={styles.modalText2}>{item.info}</Text>
+                        </Modal>
+                    );
+                })}
+
+            </View>
         );
     }
 }
+
+const styles = StyleSheet.create({
+    
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 1,
+        width: 350
+    },
+    
+    modalText: {
+        color: "black",
+        fontSize: 22,
+        marginTop: 35,
+    },
+    
+    modalText2: {
+        color: "black",
+        fontSize: 12,
+        padding: 15,
+    }
+});
 
 export default CardDetails;

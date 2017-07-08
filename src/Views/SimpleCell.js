@@ -4,7 +4,9 @@ import { View, TouchableHighlight, Text, StyleSheet } from 'react-native';
 class SimpleCell extends React.Component {
 
   goToNextScreen() {
-    this.props.navigation.navigate(this.props.data.screen);
+    console.log('goToNextScreen');
+    console.log(this.props.rowData);
+    this.props.navigation.navigate(this.props.rowData.screen, {cardData: this.props.rowData.data});
   }
 
   render() {
@@ -13,7 +15,7 @@ class SimpleCell extends React.Component {
                       underlayColor={"#E8E8E8"}
                       style={styles.button}>
       <View style={styles.container}>
-          <Text style={styles.text}>{this.props.data.text}</Text>
+          <Text style={styles.text}>{this.props.rowData.text}</Text>
       </View>
       </TouchableHighlight>
     );
