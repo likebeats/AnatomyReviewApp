@@ -5,7 +5,7 @@ export const cardData = [{
   height: 1500,
   items: [{
     title: 'C1-C7 vertebrae',
-    altTitles: ['C1-C7 vertebrae', 'C1-C7 vertebrae'],
+    altTitles: ['C vertebrae','C1-C7'],
     x: -35,
     y: 130
   }, {
@@ -86,6 +86,288 @@ export const cardData = [{
     title: 'Transverse foramen',
     x: 918,
     y: 729
+  }, ]
+}, {
+  title: 'C1 Vertebrae (Atlas)',
+  image: 'card_003',
+  width: 975,
+  height: 691,
+  items: [{
+    title: 'Posterior arch',
+    x: 284.00,
+    y: 75.00
+  }, {
+    title: 'Superior articular facet',
+    x: 181.00,
+    y: 181.00
+  }, {
+    title: 'Facet for dens',
+    x: 285.00,
+    y: 467.00
+  }, {
+    title: 'Anterior tubercle',
+    x: 570.00,
+    y: 608.00
+  }, {
+    title: 'Anterior arch',
+    x: 651.00,
+    y: 470.00
+  }, {
+    title: 'Transverse foramen',
+    x: 788.00,
+    y: 390.00
+  }, {
+    title: 'Transverse process',
+    x: 857.00,
+    y: 309.00
+  }, {
+    title: 'Groove for vertebral a.',
+    x: 755.00,
+    y: 178.00
+  }, {
+    title: 'Posterior tubercle',
+    x: 675.00,
+    y: 74.00
+  }, {
+    title: 'Lateral masses',
+    x: 477.00,
+    y: 279.00
+  }, ]
+}, {
+  title: 'C2 Vertebrae (Axis)',
+  image: 'card_004',
+  width: 897,
+  height: 730,
+  items: [{
+    title: 'Vertebral foramen',
+    x: 140.00,
+    y: 192.00
+  }, {
+    title: 'Dens',
+    x: 141.00,
+    y: 316.00
+  }, {
+    title: 'Transverse process',
+    x: 116.00,
+    y: 401.00
+  }, {
+    title: 'Superior articular facet',
+    x: 139.00,
+    y: 502.00
+  }, {
+    title: 'Anterior articular facet',
+    x: 546.00,
+    y: 630.00
+  }, {
+    title: 'Transverse foramen',
+    x: 792.00,
+    y: 474.00
+  }, {
+    title: 'Inferior articular process',
+    x: 775.00,
+    y: 293.00
+  }, {
+    title: 'Vertebral arch',
+    x: 694.00,
+    y: 187.00
+  }, {
+    title: 'Spinous process',
+    x: 618.00,
+    y: 78.00
+  }, ]
+}, {
+  title: 'Thoracic Vertebrae',
+  image: 'card_005',
+  width: 966,
+  height: 760,
+  items: [{
+    title: 'Pedicle',
+    x: 122.00,
+    y: 316.00
+  }, {
+    title: 'Superior and inferior costal facets',
+    x: 121.00,
+    y: 440.00
+  }, {
+    title: 'Intervertebral foramen',
+    x: 886.00,
+    y: 279.00
+  }, {
+    title: 'Spinous process',
+    x: 666.00,
+    y: 492.00
+  }, {
+    title: 'Transverse costal facet',
+    x: 727.00,
+    y: 545.00
+  }, {
+    title: 'Transverse process',
+    x: 808.00,
+    y: 585.00
+  }, ]
+}, {
+  title: 'Lumbar Vertebrae',
+  image: 'card_006',
+  width: 962,
+  height: 1046,
+  items: [{
+    title: 'Intervertebral foramen',
+    x: 102.00,
+    y: 416.00
+  }, {
+    title: 'Zygapopphyseal joint',
+    x: 128.00,
+    y: 620.00
+  }, {
+    title: 'Vertebral body',
+    x: 295.00,
+    y: 656.00
+  }, {
+    title: 'Superior articular process',
+    x: 691.00,
+    y: 36.00
+  }, {
+    title: 'Costal process',
+    x: 729.00,
+    y: 111.00
+  }, {
+    title: 'Spinous process',
+    x: 732.00,
+    y: 364.00
+  }, {
+    title: 'Inferior articular process',
+    x: 525.00,
+    y: 960.00
+  }, {
+    title: 'Inferior articular facet',
+    x: 724.00,
+    y: 958.00
+  }, ]
+}, {
+  title: 'Sacrum (Anterior)',
+  image: 'card_007a',
+  width: 1016,
+  height: 972,
+  items: [{
+    title: 'Anterior sacral foramina',
+    x: 205.00,
+    y: 550.00
+  }, {
+    title: 'Apex of sacrum',
+    x: 277.00,
+    y: 751.00
+  }, {
+    title: 'Coccyx',
+    x: 310.00,
+    y: 870.00
+  }, {
+    title: 'Sacrococcygeal joint',
+    x: 751.00,
+    y: 735.00
+  }, {
+    title: 'Transverse lines',
+    x: 778.00,
+    y: 548.00
+  }, {
+    title: 'Lateral part',
+    x: 884.00,
+    y: 275.00
+  }, {
+    title: 'Wing of sacrum',
+    x: 735.00,
+    y: 83.00
+  }, {
+    title: 'Superior articular process',
+    x: 610.00,
+    y: 85.00
+  }, {
+    title: 'Promontory',
+    x: 361.00,
+    y: 83.00
+  }, ]
+}, {
+  title: 'Sacrum (Posterior)',
+  image: 'card_007b',
+  width: 1258,
+  height: 1194,
+  items: [{
+    title: 'Posterior sacral foramina',
+    x: 182.00,
+    y: 674.00
+  }, {
+    title: 'Coccyx',
+    x: 384.00,
+    y: 1103.00
+  }, {
+    title: 'Sacrococcygeal joint',
+    x: 827.00,
+    y: 1039.00
+  }, {
+    title: 'Sacral cornua',
+    x: 766.00,
+    y: 990.00
+  }, {
+    title: 'Sacral hiatus',
+    x: 868.00,
+    y: 915.00
+  }, {
+    title: 'Medial sacral crest',
+    x: 940.00,
+    y: 816.00
+  }, {
+    title: 'Median sacral crest',
+    x: 1031.00,
+    y: 659.00
+  }, {
+    title: 'Lateral sacral screst',
+    x: 1032.00,
+    y: 563.00
+  }, {
+    title: 'Auricular surface',
+    x: 1071.00,
+    y: 431.00
+  }, {
+    title: 'Sacral tuberosity',
+    x: 932.00,
+    y: 112.00
+  }, {
+    title: 'Superior articular facet',
+    x: 750.00,
+    y: 113.00
+  }, {
+    title: 'Sacral canal',
+    x: 575.00,
+    y: 188.00
+  }, ]
+}, {
+  title: 'Scapula',
+  image: 'card_007c',
+  width: 962,
+  height: 894,
+  items: [{
+    title: 'Superior angle',
+    x: 261.00,
+    y: 80.00
+  }, {
+    title: 'Medial border',
+    x: 110.00,
+    y: 389.00
+  }, {
+    title: 'Inferior angle',
+    x: 197.00,
+    y: 825.00
+  }, {
+    title: 'Acromion',
+    x: 829.00,
+    y: 139.00
+  }, {
+    title: 'Coracoid process',
+    x: 653.00,
+    y: 79.00
+  }, {
+    title: 'Scapular spine',
+    x: 546.00,
+    y: 79.00
   }, ]
 }, {
   title: 'Surface Anatomy',
