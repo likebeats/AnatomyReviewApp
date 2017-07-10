@@ -21,7 +21,7 @@ class PinView extends React.Component {
         
         return (
             <View style={{ position: 'absolute', left: pinX, top: pinY }}>
-                <TouchableOpacity onPress={this.onTouchablePressed.bind(this)}>
+                <TouchableOpacity onPressIn={this.onTouchablePressed.bind(this)}>
                     <View>
                         <Image source={pinImage} />
                     </View>

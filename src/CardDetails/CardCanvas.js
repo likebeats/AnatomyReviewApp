@@ -70,7 +70,7 @@ class CardCanvas extends React.Component {
                             leaveDistance={200}
                             style={{backgroundColor: 'red'}}>
                 
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <TouchableWithoutFeedback onPressIn={Keyboard.dismiss} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                             
                             <Image style={{width:newImgWidth, height:newImgHeight}} source={src}/>
