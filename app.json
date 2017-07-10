@@ -18,10 +18,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.d511.AnatomyReview"
+      "bundleIdentifier": "com.d511.AnatomyReviewApp"
     },
     "android": {
-      "package": "com.d511.AnatomyReview"
+      "package": "com.d511.AnatomyReviewApp"
     }
   }
 }
