@@ -1,6 +1,13 @@
 export const images = {
   'card_001': require('../assets/dissector/card_001.jpg'),
   'card_002': require('../assets/dissector/card_002.jpg'),
+  'card_003': require('../assets/dissector/card_003.jpg'),
+  'card_004': require('../assets/dissector/card_004.jpg'),
+  'card_005': require('../assets/dissector/card_005.jpg'),
+  'card_006': require('../assets/dissector/card_006.jpg'),
+  'card_007a': require('../assets/dissector/card_007a.jpg'),
+  'card_007b': require('../assets/dissector/card_007b.jpg'),
+  'card_007c': require('../assets/dissector/card_007c.jpg'),
   'card_008': require('../assets/dissector/card_008.jpg'),
   'card_010': require('../assets/dissector/card_010.jpg'),
   'card_011': require('../assets/dissector/card_011.jpg'),
